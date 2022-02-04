@@ -1,0 +1,16 @@
+camunda.bpm:
+  admin-user:
+    id: admin
+    password: pw
+    firstName: Peter
+    last-name: Parker
+    email: peter@parker.com
+  filter:
+    create: All tasks
+  generic-properties:
+    properties:
+      initialize-telemetry: false
+      telemetry-reporter-activate: false
+
+server:
+  port: 7777

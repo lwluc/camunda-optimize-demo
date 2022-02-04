@@ -1,0 +1,40 @@
+version: "2"
+services:
+  camunda-plattform:
+    build: ./camunda-plattform-engine
+    image: lwluc/camunda-platform-example
+    container_name: camunda-plattform
+    mem_limit: 512M
+    ports:
+      - 7777:7777
+  
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+    ports:
+      - 9200:9200
+    restart: always
+    mem_limit: 2g
+
+  camunda-optimize:
+    image: registry.camunda.cloud/optimize-ee/optimize:3.7.1
+    mem_limit: 512M
+    environment:
+      - OPTIMIZE_CAMUNDABPM_REST_URL=http://camunda-plattform:7777/engine-rest
+      - OPTIMIZE_ELASTICSEARCH_HOST=elasticsearch
+      - OPTIMIZE_ELASTICSEARCH_HTTP_PORT=9200
+      - OPTIMIZE_EVENT_BASED_PROCESSES_IMPORT_ENABLED=true
+      - OPTIMIZE_CAMUNDA_BPM_EVENT_IMPORT_ENABLED=true
+      - OPTIMIZE_EVENT_INGESTION_ACCESS_TOKEN=demo
+      - OPTIMIZE_EVENT_BASED_PROCESSES_USER_IDS=[admin]
+    depends_on:
+      - camunda-plattform
+      - elasticsearch
+    volumes:
+      - ./licenses/OptimizeLicense.txt:/optimize/config/OptimizeLicense.txt:ro
+    restart: always
+    ports:
+      - 8090:8090
+      - 8091:8091

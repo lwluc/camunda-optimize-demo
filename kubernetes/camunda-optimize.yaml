@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: camunda-optimize
+  labels:
+    app: camunda-optimize
+spec:
+  ports:
+    - port: 8090
+      name: "http"
+    - port: 8091
+      name: "https"
+  selector:
+    app: camunda-optimize
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: camunda-optimize
+  labels:
+    app: camunda-optimize
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: camunda-optimize
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: camunda-optimize
+    spec:
+      containers:
+        - env:
+            - name: OPTIMIZE_CAMUNDABPM_REST_URL
+              value: http://camunda-plattform:7777/engine-rest
+            - name: OPTIMIZE_CAMUNDA_BPM_EVENT_IMPORT_ENABLED
+              value: "true"
+            - name: OPTIMIZE_ELASTICSEARCH_HOST
+              value: elasticsearch
+            - name: OPTIMIZE_ELASTICSEARCH_HTTP_PORT
+              value: "9200"
+            - name: OPTIMIZE_EVENT_BASED_PROCESSES_IMPORT_ENABLED
+              value: "true"
+            - name: OPTIMIZE_EVENT_BASED_PROCESSES_USER_IDS
+              value: '[admin]'
+            - name: OPTIMIZE_EVENT_INGESTION_ACCESS_TOKEN
+              value: demo
+          image: registry.camunda.cloud/optimize-ee/optimize:3.7.1
+          name: camunda-optimize
+          ports:
+            - containerPort: 8090
+              name: "http"
+            - containerPort: 8091
+              name : "https"
+          livenessProbe:
+            httpGet:
+              path: /api/readyz
+              port: 8090
+            initialDelaySeconds: 15
+            periodSeconds: 3
+          startupProbe:
+            httpGet:
+              path: /api/readyz
+              port: 8090
+            initialDelaySeconds: 15
+            failureThreshold: 3
+            periodSeconds: 5
+          volumeMounts:
+          - name: optimize-licenses
+            mountPath: /optimize/config/OptimizeLicense.txt
+            subPath: OptimizeLicense.txt
+            readOnly: true
+      restartPolicy: Always
+      volumes:
+        - name: optimize-licenses
+          configMap:
+            name: optimize-licenses
+      imagePullSecrets:
+      - name: camunda-registry

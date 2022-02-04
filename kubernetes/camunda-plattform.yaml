@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: camunda-plattform
+  labels:
+    app: camunda-plattform
+spec:
+  ports:
+    - port: 7777
+  selector:
+    app: camunda-plattform
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: camunda-plattform
+  labels:
+    app: camunda-plattform
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: camunda-plattform
+  template:
+    metadata:
+      labels:
+        app: camunda-plattform
+    spec:
+      containers:
+        - image: lwluc/camunda-platform-example
+          name: camunda-plattform
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 7777
+          resources:
+            limits:
+              memory: "536870912"
+          livenessProbe:
+            httpGet:
+              path: /engine-rest/engine
+              port: 7777
+            initialDelaySeconds: 5
+            periodSeconds: 3
+          startupProbe:
+            httpGet:
+              path: /engine-rest/engine
+              port: 7777
+            initialDelaySeconds: 10
+            failureThreshold: 5
+            periodSeconds: 5
+      restartPolicy: Always
