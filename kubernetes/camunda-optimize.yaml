@@ -47,7 +47,7 @@ spec:
               value: '[admin]'
             - name: OPTIMIZE_EVENT_INGESTION_ACCESS_TOKEN
               value: demo
-          image: registry.camunda.cloud/optimize-ee/optimize:3.7.1
+          image: registry.camunda.cloud/optimize-ee/optimize:3.7.2
           name: camunda-optimize
           ports:
             - containerPort: 8090
