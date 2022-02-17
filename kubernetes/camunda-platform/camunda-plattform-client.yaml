@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: camunda-platform-client
+  labels:
+    app: camunda-platform-client
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: camunda-platform-client
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: camunda-platform-client
+  labels:
+    app: camunda-platform-client
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: camunda-platform-client
+  template:
+    metadata:
+      labels:
+        app: camunda-platform-client
+    spec:
+      containers:
+        - image: lwluc/camunda-platform-client
+          name: camunda-platform-client
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "536870912"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 3
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            failureThreshold: 5
+            periodSeconds: 5
+      restartPolicy: Always

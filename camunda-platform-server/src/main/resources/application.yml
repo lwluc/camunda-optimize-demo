@@ -1,0 +1,19 @@
+micronaut:
+  application:
+    name: camunda-platform-example
+
+camunda:
+  admin-user:
+    id: admin
+    password: pw
+    firstName: Peter
+    last-name: Parker
+    email: peter@parker.com
+  generic-properties:
+    properties:
+      initialize-telemetry: false
+      telemetry-reporter-activate: false
+  rest:
+    enabled: true
+  webapps:
+    enabled: true

@@ -1,3 +1,14 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: elasticsearch-persistent
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -53,8 +64,10 @@ spec:
         ports:
           - containerPort: 9200
         resources:
+          requests:
+            memory: "2Gi"
           limits:
-            memory: "2147483648"
+            memory: "5Gi"
         livenessProbe:
           httpGet:
             path: /_cluster/health
@@ -69,3 +82,7 @@ spec:
           failureThreshold: 4
           periodSeconds: 10
       restartPolicy: Always
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: elasticsearch-persistent

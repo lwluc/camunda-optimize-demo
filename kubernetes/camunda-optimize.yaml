@@ -34,7 +34,7 @@ spec:
       containers:
         - env:
             - name: OPTIMIZE_CAMUNDABPM_REST_URL
-              value: http://camunda-plattform:7777/engine-rest
+              value: http://camunda-platform-server:8080/engine-rest
             - name: OPTIMIZE_CAMUNDA_BPM_EVENT_IMPORT_ENABLED
               value: "true"
             - name: OPTIMIZE_ELASTICSEARCH_HOST
