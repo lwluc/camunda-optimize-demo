@@ -40,7 +40,7 @@ java {
 
 tasks {
     dockerBuild {
-        images = ["${System.env.DOCKER_IMAGE ?: project.name}:$project.version"]
+        images = ["${System.env.DOCKER_IMAGE ?: project.name}:$project.version", "${System.env.DOCKER_IMAGE ?: project.name}:latest"]
     }
 
     dockerBuildNative {
