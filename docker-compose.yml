@@ -1,7 +1,6 @@
 version: "2"
 services:
   camunda-platform-server:
-    build: ./camunda-platform-server
     image: lwluc/camunda-platform-server
     container_name: camunda-platform-server
     mem_limit: 512M
@@ -9,7 +8,6 @@ services:
       - 8080:8080
 
   camunda-platform-client:
-    build: ./camunda-platform-client
     image: lwluc/camunda-platform-client
     container_name: camunda-platform-client
     mem_limit: 512M
