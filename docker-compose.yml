@@ -28,7 +28,7 @@ services:
     image: registry.camunda.cloud/optimize-ee/optimize:3.7.2
     mem_limit: 512M
     environment:
-      - OPTIMIZE_CAMUNDABPM_REST_URL=http://camunda-platform:8080/engine-rest
+      - OPTIMIZE_CAMUNDABPM_REST_URL=http://camunda-platform-server:8080/engine-rest
       - OPTIMIZE_ELASTICSEARCH_HOST=elasticsearch
       - OPTIMIZE_ELASTICSEARCH_HTTP_PORT=9200
       - OPTIMIZE_EVENT_BASED_PROCESSES_IMPORT_ENABLED=true
