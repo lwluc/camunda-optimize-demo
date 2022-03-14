@@ -35,5 +35,5 @@ jobs:
           DOCKER_REPOSITORY_PATH: ${{ secrets.DOCKER_REPOSITORY_PATH }}
           TESTCONTAINERS_RYUK_DISABLED: true
         run: |
-          export DOCKER_IMAGE=`echo "${DOCKER_REPOSITORY_PATH}/camunda-platform-server" | sed -e 's#//#/#' -e 's#^/##'`
+          export DOCKER_IMAGE=`echo "${DOCKER_REPOSITORY_PATH}/camunda-platform-client" | sed -e 's#//#/#' -e 's#^/##'`
           ./gradlew check dockerPush --no-daemon
