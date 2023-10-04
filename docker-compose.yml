@@ -25,7 +25,7 @@ services:
     mem_limit: 2g
 
   camunda-optimize:
-    image: registry.camunda.cloud/optimize-ee/optimize:3.11.0-RC3
+    image: registry.camunda.cloud/optimize-ee/optimize:3.10.5
     mem_limit: 512M
     environment:
       - OPTIMIZE_CAMUNDABPM_REST_URL=http://camunda-platform-server:8080/engine-rest
