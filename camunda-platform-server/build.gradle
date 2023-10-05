@@ -23,7 +23,7 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
 
     testImplementation("org.assertj:assertj-core")
-    testImplementation("org.camunda.bpm.assert:camunda-bpm-assert:13.0.0")
+    testImplementation("org.camunda.bpm:camunda-bpm-assert:7.19.0")
 }
 
 

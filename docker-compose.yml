@@ -1,5 +1,6 @@
 version: "2"
 services:
+
   camunda-platform-server:
     image: lwluc/camunda-platform-server
     container_name: camunda-platform-server
@@ -15,14 +16,35 @@ services:
       - camunda-platform-server
   
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.13
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.6.2
     container_name: elasticsearch
-    environment:
-      - discovery.type=single-node
     ports:
       - 9200:9200
-    restart: always
-    mem_limit: 2g
+    volumes:
+      - ./elasticsearchData:/usr/share/elasticsearch/data
+    environment:
+      - node.name=elasticsearch
+      - discovery.type=single-node
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=false
+      - xpack.security.transport.ssl.enabled=false
+      - xpack.license.self_generated.type=${LICENSE}
+    mem_limit: ${MEM_LIMIT}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q 'missing authentication credentials'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
 
   camunda-optimize:
     image: registry.camunda.cloud/optimize-ee/optimize:3.10.5
@@ -31,6 +53,8 @@ services:
       - OPTIMIZE_CAMUNDABPM_REST_URL=http://camunda-platform-server:8080/engine-rest
       - OPTIMIZE_ELASTICSEARCH_HOST=elasticsearch
       - OPTIMIZE_ELASTICSEARCH_HTTP_PORT=9200
+      - OPTIMIZE_ES_SECURITY_USERNAME="elastic"
+      - OPTIMIZE_ES_SECURITY_PASSWORD=${ELASTIC_PASSWORD}
       - OPTIMIZE_EVENT_BASED_PROCESSES_IMPORT_ENABLED=true
       - OPTIMIZE_CAMUNDA_BPM_EVENT_IMPORT_ENABLED=true
       - OPTIMIZE_EVENT_INGESTION_ACCESS_TOKEN=demo

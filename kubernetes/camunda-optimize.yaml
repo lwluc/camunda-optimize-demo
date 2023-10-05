@@ -41,6 +41,10 @@ spec:
               value: elasticsearch
             - name: OPTIMIZE_ELASTICSEARCH_HTTP_PORT
               value: "9200"
+            - name: OPTIMIZE_ES_SECURITY_USERNAME
+              value: "elastic"
+            - name: OPTIMIZE_ES_SECURITY_PASSWORD
+              value: ${ELASTIC_PASSWORD}
             - name: OPTIMIZE_EVENT_BASED_PROCESSES_IMPORT_ENABLED
               value: "true"
             - name: OPTIMIZE_EVENT_BASED_PROCESSES_USER_IDS
@@ -54,6 +58,9 @@ spec:
               name: "http"
             - containerPort: 8091
               name : "https"
+          resources:
+            limits:
+              memory: "3Gi"
           livenessProbe:
             httpGet:
               path: /api/readyz

@@ -29,3 +29,5 @@ target/
 /inspectIT/configuration-server/users.db
 
 /licenses/**
+/data/**
+/elasticsearchData/**
