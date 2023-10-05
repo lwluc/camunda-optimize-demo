@@ -58,7 +58,7 @@ kubectl create secret docker-registry camunda-registry \
         --namespace=default
 ```
 
-To start the kubernetes pods run `kubectl apply -f kubernetes/`.
+To start the kubernetes pods run `kubectl apply -f kubernetes/ --recursive`.
 
 ### 🐳Docker
 

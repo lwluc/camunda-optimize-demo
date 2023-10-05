@@ -44,14 +44,14 @@ spec:
             - name: OPTIMIZE_ES_SECURITY_USERNAME
               value: "elastic"
             - name: OPTIMIZE_ES_SECURITY_PASSWORD
-              value: ${ELASTIC_PASSWORD}
+              value: password
             - name: OPTIMIZE_EVENT_BASED_PROCESSES_IMPORT_ENABLED
               value: "true"
             - name: OPTIMIZE_EVENT_BASED_PROCESSES_USER_IDS
               value: '[admin]'
             - name: OPTIMIZE_EVENT_INGESTION_ACCESS_TOKEN
               value: demo
-          image: registry.camunda.cloud/optimize-ee/optimize:3.10.0
+          image: registry.camunda.cloud/optimize-ee/optimize:3.10.5
           name: camunda-optimize
           ports:
             - containerPort: 8090
