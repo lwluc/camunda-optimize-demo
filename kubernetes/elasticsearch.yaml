@@ -51,23 +51,29 @@ spec:
         image: docker.elastic.co/elasticsearch/elasticsearch:8.6.2
         imagePullPolicy: IfNotPresent
         env:
-        - name: ES_JAVA_OPTS
-          value: -Xms1024m -Xmx1024m
-        - name: cluster.initial_master_nodes
-          value: es01
-        - name: cluster.name
-          value: es-docker-cluster
         - name: node.name
           value: es01
-          # ES_MEM_LIMIT=2g
-          # ES_JVM_HEAP=1024m
+        - name: discovery.type
+          value: single-node
+        - name: ELASTIC_PASSWORD
+          value: password
+        - name: bootstrap.memory_lock
+          value: "true"
+        - name: xpack.security.enabled
+          value: "false"
+        - name: xpack.security.http.ssl.enabled
+          value: "false"
+        - name: xpack.security.transport.ssl.enabled
+          value: "false"
+        - name: xpack.license.self_generated.type
+          value: basic
         ports:
           - containerPort: 9200
         resources:
           requests:
-            memory: "2Gi"
+            memory: "1.5Gi"
           limits:
-            memory: "5Gi"
+            memory: "1.5Gi"
         livenessProbe:
           httpGet:
             path: /_cluster/health
