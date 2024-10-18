@@ -1,0 +1,27 @@
+security:
+  auth:
+    token:
+      secret: demo
+    superUserIds: [admin]
+
+engines:
+  "demo-engine":
+    rest: "http://camunda-platform-server:8080/engine-rest"
+    authentication:
+      enabled: false
+    webapps:
+      enabled: false
+
+es:
+  connection:
+    nodes:
+    - host: elasticsearch
+      httpPort: 9200
+  security:
+    username: elastic
+    password: password
+
+eventBasedProcess:
+  authorizedUserIds: [admin]
+  eventImport:
+    enabled: true
