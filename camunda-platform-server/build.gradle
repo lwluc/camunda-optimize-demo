@@ -4,7 +4,7 @@ plugins {
     id("com.google.cloud.tools.jib") version "3.4.0"
 }
 
-version = "0.2"
+version = "0.3"
 group = "de.lw"
 
 repositories {
@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation("info.novatec:micronaut-camunda-bpm-feature:2.14.0")
+    implementation("info.novatec:micronaut-camunda-bpm-feature:2.18.1")
     runtimeOnly("com.h2database:h2")
 
     implementation("io.micronaut:micronaut-http-client")
@@ -23,7 +23,7 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
 
     testImplementation("org.assertj:assertj-core")
-    testImplementation("org.camunda.bpm:camunda-bpm-assert:7.19.0")
+    testImplementation("org.camunda.bpm:camunda-bpm-assert:7.22.0")
 }
 
 

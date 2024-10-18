@@ -1,4 +1,6 @@
 micronaut:
+  server:
+    port: 8081
   application:
     name: camunda-platform-client
 camunda.external-client:
