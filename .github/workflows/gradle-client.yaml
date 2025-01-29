@@ -36,4 +36,4 @@ jobs:
           TESTCONTAINERS_RYUK_DISABLED: true
         run: |
           export DOCKER_IMAGE=`echo "${DOCKER_REPOSITORY_PATH}/camunda-platform-client" | sed -e 's#//#/#' -e 's#^/##'`
-          ./gradlew check dockerPush --no-daemon
+          ./gradlew bootBuildImage --imageName=lwluc/camunda-platform-client

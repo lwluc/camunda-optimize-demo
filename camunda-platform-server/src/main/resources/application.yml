@@ -1,15 +1,5 @@
-micronaut:
-  application:
-    name: camunda-platform-example
+spring.datasource.url: jdbc:h2:mem:camunda-h2-database
 
-camunda:
-  admin-user:
+camunda.bpm.admin-user:
     id: admin
     password: pw
-    firstName: Peter
-    last-name: Parker
-    email: peter@parker.com
-  rest:
-    enabled: true
-  webapps:
-    enabled: true

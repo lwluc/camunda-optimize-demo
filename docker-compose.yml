@@ -1,26 +1,23 @@
 services:
-
   camunda-platform-server:
     image: lwluc/camunda-platform-server
     container_name: camunda-platform-server
-    mem_limit: 512M
     ports:
-      - 8080:8080
+      - "8080:8080"
 
   camunda-platform-client:
     image: lwluc/camunda-platform-client
     container_name: camunda-platform-client
-    mem_limit: 512M
     environment:
       - MICRONAUT_ENVIRONMENTS=docker
     depends_on:
       - camunda-platform-server
-  
+
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
     container_name: elasticsearch
     ports:
-      - 9200:9200
+      - "9200:9200"
     volumes:
       - ./elasticsearchData:/usr/share/elasticsearch/data
     environment:
@@ -48,8 +45,7 @@ services:
       retries: 120
 
   camunda-optimize:
-    image: registry.camunda.cloud/optimize-ee/optimize:3.14.0
-    mem_limit: 512M
+    image: registry.camunda.cloud/optimize-ee/optimize:3.15.0
     environment:
       - ABSOLUTE_PATH_ON_HOST_TO_CONFIGURATION_FILE:/optimize/config/environment-config.yaml:ro
     depends_on:
@@ -60,5 +56,5 @@ services:
       - ./licenses/OptimizeLicense.txt:/optimize/config/OptimizeLicense.txt:ro
     restart: always
     ports:
-      - 8090:8090
-      - 8091:8091
+      - "8090:8090"
+      - "8091:8091"
