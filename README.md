@@ -28,13 +28,9 @@ Have a look at the running instance: [Camunda Platform](http://localhost:8080)
 
 You could login with `username: admin` and `password: pw`.
 
-If you want to know more about the micronaut camunda bpm integration have a look at [this Blog](https://camunda.com/blog/2021/07/automate-any-process-on-micronaut/).
-
 ### 🔨 Camunda Worker
 
 Using the [external task pattern](https://docs.camunda.org/manual/7.16/user-guide/process-engine/external-tasks/) to work on a service task.
-
-If you want to know more about the micronaut camunda external client integration have a look at [this GitHub Repo](https://github.com/camunda-community-hub/micronaut-camunda-external-client).
 
 ## 🚀Getting Started
 

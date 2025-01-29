@@ -1,14 +1,12 @@
 package de.lw.worker;
 
-import info.novatec.micronaut.camunda.external.client.feature.ExternalTaskSubscription;
-import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import org.camunda.bpm.client.spring.annotation.ExternalTaskSubscription;
 import org.camunda.bpm.client.task.ExternalTask;
 import org.camunda.bpm.client.task.ExternalTaskHandler;
 import org.camunda.bpm.client.task.ExternalTaskService;
 
 @Slf4j
-@Singleton
 @ExternalTaskSubscription(topicName = "exampleWorker")
 public class ExampleTaskHandler implements ExternalTaskHandler {
 

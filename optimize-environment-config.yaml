@@ -1,12 +1,15 @@
 security:
   auth:
-    token:
-      secret: demo
     superUserIds: [admin]
 
+api:
+  accessToken: demo
+
 engines:
-  "demo-engine":
+  "camunda-platform-server":
+    name: default
     rest: "http://camunda-platform-server:8080/engine-rest"
+    eventImportEnabled: false
     authentication:
       enabled: false
     webapps:
