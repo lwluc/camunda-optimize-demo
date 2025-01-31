@@ -31,8 +31,17 @@ java {
     targetCompatibility = JavaVersion.toVersion("17")
 }
 
+String dockerUsername = System.getProperty("username")
+String dockerPassword = System.getProperty("password")
+
 bootBuildImage {
     imageName.set("lwluc/$project.name")
     tags.set(["lwluc/$project.name:$project.version", "lwluc/$project.name:latest"])
     publish = true
+    docker {
+        publishRegistry {
+            username = dockerUsername
+            password = dockerPassword
+        }
+    }
 }
