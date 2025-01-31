@@ -8,7 +8,7 @@ import org.camunda.bpm.client.task.ExternalTaskService;
 
 @Slf4j
 @ExternalTaskSubscription(topicName = "exampleWorker")
-public class ExampleTaskHandler implements ExternalTaskHandler {
+class ExampleTaskHandler implements ExternalTaskHandler {
 
     @Override
     public void execute(ExternalTask externalTask,

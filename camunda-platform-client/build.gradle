@@ -13,6 +13,7 @@ repositories {
 
 dependencies {
     implementation('org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-external-task-client:7.22.0')
+    implementation("org.springframework.boot:spring-boot-starter-web:3.3.8")
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

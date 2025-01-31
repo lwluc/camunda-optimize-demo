@@ -8,8 +8,6 @@ services:
   camunda-platform-client:
     image: lwluc/camunda-platform-client
     container_name: camunda-platform-client
-    environment:
-      - MICRONAUT_ENVIRONMENTS=docker
     depends_on:
       - camunda-platform-server
 
