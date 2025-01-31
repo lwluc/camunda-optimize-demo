@@ -31,8 +31,5 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
       - name: Build And Push Docker Image (Server)
-        env:
-          DOCKER_REPOSITORY_PATH: ${{ secrets.DOCKER_REPOSITORY_PATH }}
-          TESTCONTAINERS_RYUK_DISABLED: true
         run: |
           ./gradlew bootBuildImage --publishImage
