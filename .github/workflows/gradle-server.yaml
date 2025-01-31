@@ -35,5 +35,4 @@ jobs:
           DOCKER_REPOSITORY_PATH: ${{ secrets.DOCKER_REPOSITORY_PATH }}
           TESTCONTAINERS_RYUK_DISABLED: true
         run: |
-          export DOCKER_IMAGE=`echo "${DOCKER_REPOSITORY_PATH}/camunda-platform-server" | sed -e 's#//#/#' -e 's#^/##'`
-          ./gradlew bootBuildImage --imageName=lwluc/camunda-platform-server
+          ./gradlew bootBuildImage --publishImage

@@ -26,8 +26,13 @@ dependencies {
     testImplementation("org.camunda.bpm:camunda-bpm-assert:7.22.0")
 }
 
-
 java {
     sourceCompatibility = JavaVersion.toVersion("17")
     targetCompatibility = JavaVersion.toVersion("17")
+}
+
+bootBuildImage {
+    imageName.set("lwluc/$project.name")
+    tags.set(["lwluc/$project.name:$project.version", "lwluc/$project.name:latest"])
+    publish = true
 }
