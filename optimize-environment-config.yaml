@@ -9,6 +9,7 @@ engines:
   "camunda-platform-server":
     name: default
     rest: "http://camunda-platform-server:8080/engine-rest"
+    importEnabled: true
     eventImportEnabled: false
     authentication:
       enabled: false
